@@ -1,0 +1,32 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.13.9
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.2
+    ports:
+      - "8080:80"
+  app01:
+    image: echavez/devsu-hello-app
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.3
+    ports:
+      - "8002"
+    expose:
+      - "8002"
+  app02:
+    image: echavez/devsu-hello-app
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.4
+    ports:
+      - "8002"
+    expose:
+      - "8002"
+networks:
+  static-network:
+    ipam:
+      config: 
+        - subnet: 172.20.0.0/16
